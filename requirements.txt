@@ -1,0 +1,15 @@
+# studio-agents dependencies (best-effort list; see README "閉包: 同梱していない依存")
+ruamel.yaml
+PyYAML
+jsonschema
+pytest
+playwright
+Pillow
+PyMuPDF
+python-pptx
+python-docx
+lxml
+markdown
+httpx
+fonttools
+certifi

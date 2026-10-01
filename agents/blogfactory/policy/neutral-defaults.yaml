@@ -1,0 +1,29 @@
+schema_version: blogfactory-policy/v1
+persona:
+  voice_default: unspecified
+  persona_ref: null
+brand:
+  profile_ref: null
+generation:
+  mode: unspecified
+  target_chars: null
+research:
+  external: disabled
+publication:
+  targets: [export]
+approval:
+  plan_review: optional
+  final_unit: article
+  review_wave_size: null
+  approver_roles: []
+  minimum_approvers: 1
+bias:
+  lesson_diversity: {requirement: report, max_single_share: null}
+  framing: {requirement: report, max_single_stance_share: null}
+  advertorial: {requirement: report, limitation_min_rate: null, cta_max_same_objective_share: null}
+  similarity: {requirement: report, review_at: null}
+  grounding: {requirement: report, external_article_min_rate: null}
+  search_intent: {requirement: report, overlap_review_at: null}
+reporting:
+  quality_positioning: configured_visibility
+  custom_copy_ref: null

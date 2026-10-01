@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>studio-agents 全体像 — ユーザー導線とオプション</title>
+<style>
+:root{
+  --bg:#faf9f6;--card:#fff;--ink:#26251f;--sub:#6b6a62;--line:#e7e5de;
+  --acc:#2f6f5f;--acc2:#b3541e;--chip:#eef2ef;--warn:#8a3324;
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#191914;--card:#22221c;--ink:#eceade;--sub:#a3a196;--line:#3a3931;--chip:#2b2f2b;}
+}
+*{box-sizing:border-box}
+body{margin:0 auto;max-width:980px;padding:36px 20px 80px;font-family:-apple-system,"Hiragino Sans",sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}
+h1{font-size:1.55rem;margin:0 0 6px}
+.lead{color:var(--sub);margin:0 0 28px}
+h2{font-size:1.15rem;margin:44px 0 12px;padding-left:10px;border-left:4px solid var(--acc)}
+h3{font-size:1rem;margin:0 0 4px}
+.flow{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;overflow-x:auto}
+.flow pre{margin:0;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.7;white-space:pre}
+.grid{display:grid;grid-template-columns:1fr;gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 14px}
+.card .no{display:inline-block;background:var(--acc);color:#fff;border-radius:999px;width:24px;height:24px;text-align:center;line-height:24px;font-size:13px;font-weight:700;margin-right:8px}
+.io{color:var(--sub);font-size:.9rem;margin:2px 0 10px}
+.say{background:var(--chip);border-radius:10px;padding:10px 12px;font-size:.92rem;margin:8px 0}
+.say b{color:var(--acc)}
+table{width:100%;border-collapse:collapse;font-size:.88rem;margin:10px 0 4px}
+th,td{border-top:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+th{color:var(--sub);font-weight:600;white-space:nowrap}
+td:first-child{white-space:nowrap;font-weight:600}
+.chips span{display:inline-block;background:var(--chip);border-radius:999px;padding:2px 10px;margin:2px 4px 2px 0;font-size:.82rem}
+.pay{color:var(--acc2);font-weight:700}
+.free{color:var(--acc);font-weight:700}
+.note{font-size:.85rem;color:var(--sub)}
+.money{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 18px 14px}
+.link{color:var(--sub);font-size:.85rem;margin-top:8px}
+.rule{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc2);border-radius:10px;padding:12px 16px;margin:10px 0}
+</style>
+</head>
+<body>
+
+<h1>studio-agents 全体像</h1>
+<p class="lead">5つのAIエージェント — ユーザーから見た導線・選べるオプション・課金ポイント。<br>使い方はすべて「<b>Claudeに話しかけるだけ</b>」。コマンドや型の名前を覚える必要はありません。</p>
+
+<h2>製造ラインの全体図</h2>
+<div class="flow"><pre>
+ <b>ゼロから作る</b>
+  テーマ・資料・URL ──▶ ① Slide ──── deck.json ──▶ ④ Slidecast ──▶ 🎬 解説動画
+                          (スライド)                  (スライド→動画)
+  テーマ・資料・URL ──▶ ② Blog ───── article.json ─▶ ⑤ Blogcast ──▶ 🎬 解説動画
+                          (ブログ記事)                (記事→動画)
+
+ <b>手持ちの資産から</b>
+  見づらいパワポ/PDF ──▶ ③ Reslide ── deck.json ────▶ ④ Slidecast ──▶ 🎬
+                          (作り替え)
+  手持ちパワポ/PDF ─────────────────────────────▶ ④ Slidecast ──▶ 🎬 (そのまま動画化)
+  自社の既存ブログURL ──────────────────────────────▶ ⑤ Blogcast ──▶ 🎬
+</pre></div>
+
+<h2>全エージェント共通のルール</h2>
+<div class="card">
+<table>
+<tr><td>素材の権利</td><td>取り込む資料・URL・記事は、自分が権利を持つもの、または利用許諾のあるものに限ります。第三者の記事・ニュースは、要約と出典明記の範囲で扱ってください</td></tr>
+<tr><td>会話で完結</td><td>「この資料でスライド作って」「このURLを動画にして」——Claudeが必要なことだけ聞き、あとは提案してくれる</td></tr>
+<tr><td>おまかせOK</td><td>決めていない項目(型・画風・声など)は<b>AIが中身を見て提案</b>。こだわる時だけ「投資家向けに固く」のように言えば反映</td></tr>
+<tr><td>課金は必ず事前承認</td><td>お金がかかる工程(AI画像・音声合成)は<b>「◯枚で約◯円です。進めますか？」→OK</b>してから実行。承認前は1円も使わない</td></tr>
+<tr><td>画風の使い回し</td><td>気に入った画風は<b>名前を付けて保存</b>。「前と同じテイストで」「◯◯の画風で」で再現できる(全エージェント共通の保存庫)</td></tr>
+<tr><td>作り直しに強い</td><td>ナレ・絵コンテ・画像は保存され、<b>再ビルドは差分だけ課金</b>(例: 声だけ変える=数円)。作り直したい所だけ「--regen」で更新</td></tr>
+</table>
+</div>
+
+<h2>① Slide — テーマ/資料 → 高品質スライド</h2>
+<div class="card">
+<p class="io">入力: テーマ・PDF/PPTX/DOCX・URL・メモ(複数可) → 出力: <b>スライド画像・編集可能PPTX・PDF</b> + deck.json(動画化への引き継ぎ)</p>
+<div class="say">🗣 「この事業計画で<b>投資家向けのスライド</b>作って」<br>🤖 「構成=ピッチ・画風=midnightが合いそうです → 6枚できました(編集可PPTX付き)。<b>AI画像版なら約8円</b>でもっと見栄えが出ますが、どうしますか？」</div>
+<table>
+<tr><th>選べるもの</th><th>選択肢</th><th>未指定なら</th></tr>
+<tr><td>宛先</td><td>誰の資料/誰に見せる/目的/トーン(自由記述も可)</td><td>AIが推定</td></tr>
+<tr><td>構成(話の型)</td><td class="chips"><span>コンサル提案</span><span>サービス紹介</span><span>導入事例</span><span>ピッチ</span><span>教育・解説</span><span>報告まとめ</span></td><td>AIが提案</td></tr>
+<tr><td>画風</td><td class="chips"><span>明朝エグゼクティブ</span><span>ミッドナイト</span><span>コーラル</span><span>ウォームセリフ</span><span>モダンサンス</span><span>インディゴ</span></td><td>AIが提案</td></tr>
+<tr><td>描画モード</td><td><span class="free">テンプレ版(編集可PPTX)=無料</span> / <span class="pay">AI画像版(gpt-image)=約1.5円/枚</span></td><td>AI画像版まで作るのが標準(承認制)</td></tr>
+<tr><td>手直し</td><td>デザイン自己改善 / 1枚だけ型変更 / 文字照合→指摘枚だけ再描画</td><td>—</td></tr>
+</table>
+</div>
+
+<h2>② Blog — テーマ/資料 → 図解付きブログ記事</h2>
+<div class="card">
+<p class="io">入力: テーマ・資料・URL(複数可) → 出力: <b>図解付きHTML(WordPress貼り付け可)</b>・Markdown + article.json(動画化への引き継ぎ)</p>
+<div class="say">🗣 「この社内メモ、<b>初心者向けのブログ</b>にして」<br>🤖 「型=やさしい解説・画風=コーラルで書きますね → 2500字・8節できました。捏造チェックで該当文を除去済み。<b>各節に解説図を付けると8枚で約10円</b>ですが、付けますか？」</div>
+<table>
+<tr><th>選べるもの</th><th>選択肢</th><th>未指定なら</th></tr>
+<tr><td>記事の型</td><td class="chips"><span>やさしい解説</span><span>ハウツー</span><span>◯選まとめ</span><span>比較</span><span>事例・体験談</span><span>ニュース解説</span><span>オピニオン</span></td><td>AIが提案</td></tr>
+<tr><td>モード/長さ</td><td>長文SEO(肉付けあり・既定) / 元ネタ忠実(短め)、目標字数</td><td>SEO 3500字</td></tr>
+<tr><td>画風(図解用)</td><td>Slideと同じ6種</td><td>AIが提案</td></tr>
+<tr><td>品質ゲート</td><td><span class="free">捏造除去・水増し圧縮・焦らし解消(自動・無料)</span></td><td>常に実行</td></tr>
+<tr><td>図解</td><td><span class="pay">各節を「内容入りの解説スライド図」に(約1.5円/枚・承認制)</span></td><td>図付きHTMLまでが標準(承認制)</td></tr>
+</table>
+</div>
+
+<h2>③ Reslide — 見づらいスライド → 作り替え</h2>
+<div class="card">
+<p class="io">入力: 既存のPPTX/PDF → 出力: <b>作り替え後のスライド一式(PNG/PDF/PPTX)</b> + before比較用の元ページ + deck.json</p>
+<div class="say">🗣 「この行政資料風のパワポ、<b>きれいに作り替えて</b>」<br>🤖 「1ページに話題が詰まっているので<b>複数枚に分割</b>して整理します。画風=明朝エグゼクティブ、<b>約20円</b>ですが進めますか？ → 完成。数字の照合も全通過です」</div>
+<table>
+<tr><th>特徴</th><th>内容</th></tr>
+<tr><td>詰め詰め対策</td><td>1ページに複数話題があれば<b>話題ごとに自動分割</b>(1枚→数枚)。内容は捨てずに全部割り当て</td></tr>
+<tr><td>忠実さの保証</td><td><span class="free">中身の抽出は「書いてある文言・数字だけ」+ 抽出漏れ照合 + 描画後の文字照合(全部無料)</span></td></tr>
+<tr><td>画風</td><td>6種から指定 or AIが提案(保存・使い回し可)</td></tr>
+<tr><td>課金</td><td><span class="pay">gpt-image 約1.5円/枚(承認制)</span>。指摘が出た枚だけの再描画も可</td></tr>
+</table>
+</div>
+
+<h2>④ Slidecast — スライド → 解説動画</h2>
+<div class="card">
+<p class="io">入力: Slide/Reslideの成果物(deck.json) <b>または手持ちのPPTX/PDF</b> → 出力: <b>解説動画 mp4</b>(1080p・字幕付き)</p>
+<div class="say">🗣 「このスライド、<b>動画にして</b>」<br>🤖 「声はおまかせなら設定済みの声で。ナレを作りました——<b>音声合成で約1.5円</b>、動画にしていいですか？ → 完成。声や台本を変えたければ言ってください」</div>
+<table>
+<tr><th>選べるもの</th><th>選択肢</th><th>未指定なら</th></tr>
+<tr><td>入力</td><td>deck.json(①③の出力) / 手持ちPPTX・PDF(そのまま動画化)</td><td>—</td></tr>
+<tr><td>声(6種・別環境でも同じ声を再現可)</td><td class="chips"><span>Nao 男・明るい説明</span><span>Shohei 男・落ち着き</span><span>Ren 男・なめらか</span><span>Miki 女・明るい</span><span>Maya 女・クリア</span><span>Kazuha 女・温かい</span></td><td>設定値(未設定なら指定を求める)</td></tr>
+<tr><td>映像</td><td>静止スライド+<b>白フェード切替</b>+黒帯字幕(音声同期・字幕はフェードしない)</td><td>固定仕様</td></tr>
+<tr><td>ナレーション</td><td><span class="free">AIが生成(無料)して固定保存</span>——再ビルドでも同じ内容。作り直しは指示すればOK</td><td>自動生成</td></tr>
+<tr><td>課金</td><td><span class="pay">ElevenLabs音声のみ(数百字で1〜2円・承認制)</span></td><td>—</td></tr>
+</table>
+</div>
+
+<h2>⑤ Blogcast — 記事/URL → 台本の型付き動画</h2>
+<div class="card">
+<p class="io">入力: 記事URL / Blogの成果物(article.json) / テキスト → 出力: <b>解説動画 mp4</b>(自由なイラスト画・字幕付き)</p>
+<div class="say">🗣 「この自社ブログ記事、<b>動画にして</b>」<br>🤖 「台本の型は<b>ビフォーアフター型</b>が合いそうです。画風は"手描き風・生活感"を提案します。<b>画像8枚+音声で約20円</b>、進めますか？ → 完成」</div>
+<table>
+<tr><th>選べるもの</th><th>選択肢</th><th>未指定なら</th></tr>
+<tr><td>台本の型(7種)</td><td class="chips"><span>記事忠実・実用</span><span>記事忠実・物語</span><span>結論3つ先出し</span><span>悩み解決</span><span>ビフォーアフター</span><span>謎引っぱり</span><span>◯個まとめ</span></td><td>AIが記事を読んで提案</td></tr>
+<tr><td>画風</td><td><b>自由文のアートディレクション</b>(スライド風でない情景イラスト)。保存名で使い回し可</td><td>AIが記事から提案</td></tr>
+<tr><td>声</td><td>Slidecastと同じ6種</td><td>設定値(未設定なら指定を求める)</td></tr>
+<tr><td>作り直し</td><td>絵コンテ(ナレ・画)は固定保存。<b>画像はキャッシュされ、声だけ変える再ビルドは数円</b></td><td>—</td></tr>
+<tr><td>課金</td><td><span class="pay">gpt-image 約2円/枚 + 音声1〜4円(合算概算→承認制)</span></td><td>—</td></tr>
+</table>
+</div>
+
+<h2>課金の目安(概算)</h2>
+<div class="money">
+<table>
+<tr><th>やること</th><th>目安</th></tr>
+<tr><td>スライド(テンプレ版) / ブログ本文 / 作り替えの中身抽出 / ナレ生成</td><td><span class="free">追加料金なし</span>(手元の Claude/Codex CLI)</td></tr>
+<tr><td>スライドのAI画像版(6枚)</td><td>約8円</td></tr>
+<tr><td>ブログの図解(8枚)</td><td>約10円</td></tr>
+<tr><td>スライド→動画(音声のみ)</td><td>約1.5〜3.5円</td></tr>
+<tr><td>記事→動画(画像8枚+音声)</td><td>約20円 / <b>声違い再ビルドは約3.4円</b></td></tr>
+<tr><td>行政資料風パワポ数枚→十数枚に作り替え</td><td>約20円</td></tr>
+</table>
+<p class="note">すべて「概算を見せる→OKをもらう→実行」。実費は生成後に報告。</p>
+</div>
+
+<h2>環境まわり</h2>
+<div class="rule">
+初回は「<b>セットアップ確認して</b>」と言えば、Claudeが診断スクリプトで足りないもの(ffmpeg・LibreOffice・APIキー等)を洗い出し、1つずつ確認しながら導入します。使うエージェントの分だけ揃えばOK(①②は軽量、④⑤は動画用の追加ツールが必要)。
+</div>
+
+
+</body>
+</html>

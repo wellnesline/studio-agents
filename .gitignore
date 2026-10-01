@@ -1,0 +1,10 @@
+.env
+styles.json.lock
+styles.broken-*.json
+out/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.env.*
+!.env.example

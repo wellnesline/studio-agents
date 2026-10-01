@@ -1,0 +1,6 @@
+id: media-outlet
+version: 1
+persona:
+  voice_default: third_person
+research:
+  external: allowed
